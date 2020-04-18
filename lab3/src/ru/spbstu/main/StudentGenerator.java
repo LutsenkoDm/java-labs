@@ -12,7 +12,7 @@ public class StudentGenerator extends Thread
   private static final String[] subjects = {"Math", "OOP", "Physics"};
   private static final int[] counts = {10, 20, 100};
 
-  public void setResource(ConcurrentLinkedQueue<Student> queue)
+  void setResource(ConcurrentLinkedQueue<Student> queue)
   {
     this.queue = queue;
   }
@@ -25,7 +25,6 @@ public class StudentGenerator extends Thread
       {
         try
         {
-          wait(100);
           semaphore.acquire();
           Student student = new Student(counts[new Random().nextInt(counts.length)], subjects[new Random().nextInt(subjects.length)]);
           queue.add(student);
