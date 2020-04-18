@@ -31,13 +31,8 @@ public class Robot extends Thread
         {
           working = true;
           semaphore.acquire();
-          Student tookStudent = queue.element();
           System.out.println("     Take " + queue.remove().toString() + "; ");
           semaphore.release();
-          synchronized (this)
-          {
-            wait(tookStudent.labsCount * 100);
-          }
           System.out.println("     " + subject + " ends");
           working = false;
         }
