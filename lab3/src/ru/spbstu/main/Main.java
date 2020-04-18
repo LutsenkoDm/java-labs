@@ -12,26 +12,10 @@ public class Main
 
   public static void main(String[] args)
   {
-    /*queue.add(new Student(100, "Math"));
-    queue.add(new Student(100, "Math"));
-    queue.add(new Student(100, "OOP"));
-    queue.add(new Student(100, "Physics"));
-    queue.add(new Student(100, "Physics"));
-    queue.add(new Student(100, "OOP"));
-    queue.add(new Student(100, "Physics"));*/
-
-    try
-    {
-      studentGenerator.start();
-      studentGenerator.setResource(queue);
-      Thread.sleep(1000);
-      robot1.start();
-      robot2.start();
-      robot3.start();
-    }
-    catch (InterruptedException e)
-    {
-      e.printStackTrace();
-    }
+    studentGenerator.start();
+    studentGenerator.setResource(queue);
+    robot1.start();
+    robot2.start();
+    robot3.start();
   }
 }
