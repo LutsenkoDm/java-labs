@@ -9,7 +9,7 @@ public class Robot extends Thread
   private boolean working = false;
   private String subject;
   private ConcurrentLinkedQueue<Student> queue;
-  static Semaphore semaphore  = new Semaphore(1, true);
+  private static Semaphore semaphore  = new Semaphore(1, true);
 
   Robot(String subject, ConcurrentLinkedQueue<Student> queue)
   {
