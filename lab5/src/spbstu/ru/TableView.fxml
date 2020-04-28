@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@dark_theme.css"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="spbstu.ru.TableViewController">
+   <VBox layoutX="21.0" layoutY="30.0" prefHeight="480.0" prefWidth="759.0" spacing="10.0"
+         AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+         AnchorPane.topAnchor="30.0">
+      <TableView fx:id="tableView" prefHeight="250.0" prefWidth="290.0">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="120.0" text="id"/>
+            <TableColumn fx:id="prodid" prefWidth="154.0" text="prodid"/>
+            <TableColumn fx:id="title" prefWidth="252.0" text="title"/>
+            <TableColumn fx:id="cost" prefWidth="211.0" text="cost"/>
+         </columns>
+         <VBox.margin>
+            <Insets/>
+         </VBox.margin>
+      </TableView>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <TextField fx:id="titleTextField" onMouseClicked="#setErrorLabelInvisible" prefWidth="175.0"
+                    promptText="Title"/>
+         <TextField fx:id="costTextField" onMouseClicked="#setErrorLabelInvisible" prefWidth="175.0"
+                    promptText="Cost"/>
+         <Label fx:id="ErrorLabel" prefHeight="28.0" prefWidth="380.0" visible="false"/>
+      </HBox>
+      <HBox prefWidth="200.0" spacing="10.0">
+         <Button fx:id="add" mnemonicParsing="false" onAction="#addToTable" prefWidth="175.0" text="Add"/>
+         <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteFromTable" prefWidth="175.0" text="Delete"/>
+         <Button fx:id="show_all" mnemonicParsing="false" onAction="#showAll" prefWidth="175.0" text="Show all"/>
+      </HBox>
+      <HBox layoutX="10.0" layoutY="258.0" prefHeight="45.0" prefWidth="759.0" spacing="10.0">
+         <Button fx:id="price" mnemonicParsing="false" onAction="#getPrice" prefWidth="175.0" text="Price"/>
+         <Button fx:id="change_price" mnemonicParsing="false" onAction="#changePrice" prefWidth="175.0" text="Change price"/>
+         <Button fx:id="filter_by_price" mnemonicParsing="false" onAction="#filterByPrice" prefWidth="175.0" text="Filter by price"/>
+      </HBox>
+   </VBox>
+   <TextField fx:id="secondPriceTextField" layoutX="485.0" layoutY="491.0" prefHeight="37.0" prefWidth="175.0"
+              promptText="topPrice" visible="false"/>
+   <TextField fx:id="firstPriceTextField" layoutX="289.0" layoutY="491.0" prefHeight="37.0" prefWidth="175.0"
+              promptText="lowPrice" visible="false"/>
+   <Button fx:id="filterOk" layoutX="441.0" layoutY="540.0" mnemonicParsing="false" onAction="#filterOkButtonPushed"
+           prefHeight="33.0" prefWidth="71.0" text="OK" visible="false"/>
+</AnchorPane>
