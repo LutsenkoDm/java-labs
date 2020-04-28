@@ -19,11 +19,10 @@ class Commands
 
   static void add() throws SQLException
   {
-    try
+    try (PreparedStatement preparedStatement = connection.prepareStatement("insert into Items (prodid, title, cost) values (?, ?, ?)"))
     {
       String title = in.next();
       int cost = in.nextInt();
-      PreparedStatement preparedStatement = connection.prepareStatement("insert into Items (prodid, title, cost) values (?, ?, ?)");
       preparedStatement.setInt(1, ++prodidValue);
       preparedStatement.setString(2, title);
       preparedStatement.setInt(3, cost);
@@ -37,7 +36,6 @@ class Commands
     {
       System.out.println("There can`t be two products with the same name or prodid");
     }
-
   }
 
   static void delete() throws SQLException
@@ -46,6 +44,7 @@ class Commands
     PreparedStatement preparedStatement = connection.prepareStatement("delete from Items where title = ?");
     preparedStatement.setString(1, title);
     preparedStatement.executeUpdate();
+    preparedStatement.close();
   }
 
   static void show_all() throws SQLException
@@ -59,6 +58,7 @@ class Commands
       System.out.print(resultSet.getInt("cost"));
       System.out.println();
     }
+    resultSet.close();
   }
 
   static void price() throws SQLException
@@ -75,15 +75,16 @@ class Commands
     {
       System.out.println("Такого товара нет");
     }
+    preparedStatement.close();
+    resultSet.close();
   }
 
   static void change_price() throws SQLException
   {
-    try
+    try (PreparedStatement preparedStatement = connection.prepareStatement("update Items SET cost = ? where title = ?"))
     {
       String title = in.next();
       int cost = in.nextInt();
-      PreparedStatement preparedStatement = connection.prepareStatement("update Items SET cost = ? where title = ?");
       preparedStatement.setInt(1, cost);
       preparedStatement.setString(2, title);
       preparedStatement.executeUpdate();
@@ -96,11 +97,10 @@ class Commands
 
   static void filter_by_price() throws SQLException
   {
-    try
+    try (PreparedStatement preparedStatement = connection.prepareStatement("select * from Items where cost > ? and cost < ?"))
     {
       int firstPrice = in.nextInt();
       int secondPrice = in.nextInt();
-      PreparedStatement preparedStatement = connection.prepareStatement("select * from Items where cost > ? and cost < ?");
       preparedStatement.setInt(1, Math.min(firstPrice, secondPrice));
       preparedStatement.setInt(2, Math.max(firstPrice, secondPrice));
       ResultSet resultSet = preparedStatement.executeQuery();
@@ -112,6 +112,7 @@ class Commands
         System.out.print(resultSet.getInt("cost"));
         System.out.println();
       }
+      resultSet.close();
     }
     catch (InputMismatchException e)
     {

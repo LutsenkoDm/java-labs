@@ -13,20 +13,20 @@ public class Main
         String userName = "Dmitrii";
         String password = "0000";
         String connectionUrl = "jdbc:mysql://localhost/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        try
+        try (Scanner in = new Scanner(System.in);
+             Connection connection = DriverManager.getConnection(connectionUrl, userName, password);
+             Statement statement = connection.createStatement();
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into Items (prodid, title, cost) values (?, ?, ?)");
+             )
         {
-            Scanner in = new Scanner(System.in);
             System.out.print("Введите N: ");
             final int N = in.nextInt();
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(connectionUrl, userName, password);
-            Statement statement = connection.createStatement();
             statement.executeUpdate("drop table IF EXISTS Items");
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Items (id INT NOT NULL AUTO_INCREMENT, prodid INT NOT NULL, title CHAR(60) NOT NULL, cost INT NOT NULL, PRIMARY KEY (id), UNIQUE KEY (title), UNIQUE KEY (prodid))");
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into Items (prodid, title, cost) values (?, ?, ?)");
             for (int i = 0; i < N; i++)
             {
-                preparedStatement.setInt(1,  i + 1);
+                preparedStatement.setInt(1, i + 1);
                 preparedStatement.setString(2, "item" + (i + 1));
                 preparedStatement.setInt(3, new Random().nextInt(1000));
                 preparedStatement.executeUpdate();
@@ -49,7 +49,6 @@ public class Main
                     in.nextLine();
                 }
             }
-            in.close();
         }
         catch (SQLException | InputMismatchException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException | ClassNotFoundException e)
         {
