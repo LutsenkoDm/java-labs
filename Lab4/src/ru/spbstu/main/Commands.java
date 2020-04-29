@@ -17,7 +17,7 @@ class Commands
     Commands.prodidValue = N;
   }
 
-  static void add() throws SQLException
+  private static void add() throws SQLException
   {
     try (PreparedStatement preparedStatement = connection.prepareStatement("insert into Items (prodid, title, cost) values (?, ?, ?)"))
     {
@@ -38,7 +38,7 @@ class Commands
     }
   }
 
-  static void delete() throws SQLException
+  private static void delete() throws SQLException
   {
     String title = in.next();
     PreparedStatement preparedStatement = connection.prepareStatement("delete from Items where title = ?");
@@ -47,7 +47,7 @@ class Commands
     preparedStatement.close();
   }
 
-  static void show_all() throws SQLException
+  private static void show_all() throws SQLException
   {
     ResultSet resultSet = connection.createStatement().executeQuery("select * from Items");
     while (resultSet.next())
@@ -61,7 +61,7 @@ class Commands
     resultSet.close();
   }
 
-  static void price() throws SQLException
+  private static void price() throws SQLException
   {
     String title = in.next();
     PreparedStatement preparedStatement = connection.prepareStatement("select cost from Items where title = ?");
@@ -79,7 +79,7 @@ class Commands
     resultSet.close();
   }
 
-  static void change_price() throws SQLException
+  private static void change_price() throws SQLException
   {
     try (PreparedStatement preparedStatement = connection.prepareStatement("update Items SET cost = ? where title = ?"))
     {
@@ -95,7 +95,7 @@ class Commands
     }
   }
 
-  static void filter_by_price() throws SQLException
+  private static void filter_by_price() throws SQLException
   {
     try (PreparedStatement preparedStatement = connection.prepareStatement("select * from Items where cost > ? and cost < ?"))
     {

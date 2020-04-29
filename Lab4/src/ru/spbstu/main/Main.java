@@ -35,6 +35,10 @@ public class Main
             Constructor<Commands> constructor = commands.getDeclaredConstructor(Scanner.class, Connection.class, int.class);
             constructor.newInstance(in, connection, N);
             Method[] methods = commands.getDeclaredMethods();
+            for (var m : methods)
+            {
+                m.setAccessible(true);
+            }
             while (in.hasNext())
             {
                 String command = in.next();

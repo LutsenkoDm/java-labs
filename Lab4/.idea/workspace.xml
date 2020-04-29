@@ -29,7 +29,7 @@
     <property name="Repository.Attach.Sources" value="true" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
     <property name="full.screen.before.presentation.mode" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/lab5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
