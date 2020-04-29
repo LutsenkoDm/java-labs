@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../cssFiles/dark_theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spbstu.ru.controllers.FirstPageController">
+   <children>
+      <Button layoutX="321.0" layoutY="284.0" mnemonicParsing="false" onAction="#changeScreenButtonPushed" text="Go to Table View" />
+      <TextField fx:id="TextFieldForN" layoutX="321.0" layoutY="235.0" onMouseClicked="#setErrorLabelInvisible" prefHeight="37.0" prefWidth="159.0" promptText="Введите N" />
+      <Label fx:id="ErrorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="254.0" layoutY="327.0" prefHeight="37.0" prefWidth="290.0" text="Invalid N, try again" textAlignment="CENTER" visible="false" />
+   </children>
+</AnchorPane>

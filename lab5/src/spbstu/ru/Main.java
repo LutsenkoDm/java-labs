@@ -5,13 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import static spbstu.ru.TableViewController.closeConnection;
+import static spbstu.ru.controllers.TableViewController.closeConnection;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FirstPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/spbstu/ru/fxmlFiles/FirstPage.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
