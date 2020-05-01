@@ -40,6 +40,7 @@ public class TableViewController implements Initializable
   private TextField costTextField;
 
   private static Connection connection;
+  private ObservableList<Item> bufferedItems;
 
   @Override
   public void initialize(URL url, ResourceBundle rb)
@@ -56,10 +57,8 @@ public class TableViewController implements Initializable
     {
       Class.forName("com.mysql.cj.jdbc.Driver");
       connection = DriverManager.getConnection(connectionUrl, userName, password);
-      Statement statement = connection.createStatement();
-      statement.executeUpdate("drop table IF EXISTS Items");
-      statement.executeUpdate("CREATE TABLE IF NOT EXISTS Items (id INT NOT NULL AUTO_INCREMENT, prodid INT NOT NULL, title CHAR(60) NOT NULL, cost INT NOT NULL, PRIMARY KEY (id), UNIQUE KEY (title), UNIQUE KEY (prodid))");
       tableView.setItems(getFirstNItems());
+      bufferedItems = FXCollections.observableArrayList(tableView.getItems());
     }
     catch (ClassNotFoundException | SQLException e)
     {
@@ -142,18 +141,9 @@ public class TableViewController implements Initializable
   }
 
   @FXML
-  private void showAll() throws SQLException
+  private void showAll()
   {
-    ResultSet resultSet = connection.createStatement().executeQuery("select * from Items");
-    while (resultSet.next())
-    {
-      System.out.print(resultSet.getInt("id") + "  ");
-      System.out.print(resultSet.getInt("prodid") + "  ");
-      System.out.print(resultSet.getString("title") + "  ");
-      System.out.print(resultSet.getInt("cost"));
-      System.out.println();
-    }
-    resultSet.close();
+    tableView.setItems(bufferedItems);
   }
 
   @FXML
@@ -223,24 +213,13 @@ public class TableViewController implements Initializable
   @FXML
   private void filterOkButtonPushed()
   {
-    try (PreparedStatement preparedStatement = connection.prepareStatement("select * from Items where cost >= ? and cost <= ?"))
+    try
     {
       int firstPrice = Integer.parseInt(firstPriceTextField.getText());
       int secondPrice = Integer.parseInt(secondPriceTextField.getText());
       ObservableList<Item> allItems = tableView.getItems();
+      bufferedItems = FXCollections.observableArrayList(allItems);
       allItems.removeAll(allItems.filtered(x -> (x.getCost() < firstPrice | x.getCost() > secondPrice)));
-
-      preparedStatement.setInt(1, Math.min(firstPrice, secondPrice));
-      preparedStatement.setInt(2, Math.max(firstPrice, secondPrice));
-      ResultSet resultSet = preparedStatement.executeQuery();
-      while (resultSet.next())
-      {
-        System.out.print(resultSet.getInt("id") + "  ");
-        System.out.print(resultSet.getInt("prodid") + "  ");
-        System.out.print(resultSet.getString("title") + "  ");
-        System.out.print(resultSet.getInt("cost"));
-        System.out.println();
-      }
       firstPriceTextField.clear();
       secondPriceTextField.clear();
       firstPriceTextField.setVisible(false);
@@ -251,10 +230,6 @@ public class TableViewController implements Initializable
     {
       ErrorLabel.setVisible(true);
       ErrorLabel.setText("Invalid cost values");
-    }
-    catch (SQLException e)
-    {
-      e.printStackTrace();
     }
   }
 
