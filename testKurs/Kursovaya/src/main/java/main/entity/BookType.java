@@ -10,7 +10,6 @@ import java.util.Set;
 @Entity
 @Table(name = "bookTypes")
 public class BookType {
-
     public BookType() {
     }
 

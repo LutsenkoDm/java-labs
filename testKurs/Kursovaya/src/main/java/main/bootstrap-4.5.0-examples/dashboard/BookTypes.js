@@ -55,7 +55,7 @@ function addRow()
       dayCount : 1000
     });
 
-    xhr.open("POST", '//localhost:8080/lib/addBookType')
+    xhr.open("POST", 'http://localhost:8080/lib/addBookType')
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
     xhr.send(json);

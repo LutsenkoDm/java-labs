@@ -41,7 +41,7 @@
             data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <input id="navSearch" class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" >
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="#">Sign out</a>
@@ -56,27 +56,27 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="C:\Users\Dmitrii\Desktop\bootstrap-4.5.0-examples\dashboard\Journal.html">
+                           href="/journal">
                             <span data-feather="home"></span>
                             Journal
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="C:\Users\Dmitrii\Desktop\bootstrap-4.5.0-examples\dashboard\Clients.html">
+                           href="clients.html">
                             <span data-feather="users"></span>
                             Clients
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="/books">
                             <span data-feather="shopping-cart"></span>
                             Books<span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="C:\Users\Dmitrii\Desktop\bootstrap-4.5.0-examples\dashboard\BookTypes.html">
+                           href="/bookTypes">
                             <span data-feather="book-open"></span>
                             BookTypes
                         </a>
@@ -87,22 +87,42 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Add Book</h1>
-                <form class="form-inline my-2 my-lg-0" method="post" onsubmit="addRow();return false;">
+                <form class="form-inline my-2 my-lg-0" onsubmit="addRow();return false;">
                     <input id="Name" type="text" class="form-control mr-sm-2" placeholder="Name" aria-label="Name"
                            required>
                     <input id="Cnt" type="number" class="form-control mr-sm-2" placeholder="Cnt" aria-label="Cnt"
                            step="1" min="1" required>
-                    <input id="TypeId" type="number" class="form-control mr-sm-2" placeholder="TypeId"
-                           aria-label="TypeId" step="1" min="1" required>
-                    <input type="submit" name="subm" class="btn btn-md btn-outline-secondary" value="Add"/>
 
+                    <select class="form-control" name="bookTypesSelectorAdd" id="bookTypesSelectorAdd" onclick="getBookTypes()" required>
+                    <option label ="Type Id" selected></option>
+                    </select>
 
-                    <input type="button" onClick="addRow();" name="testb" class="btn btn-md btn-outline-secondary"
-                           value="testb"/>
-                    <button onClick="getOne();" class="btn btn-md btn-outline-secondary">getone</button>
+                    <input type="submit" name="submit" class="btn btn-md btn-outline-secondary" value="Add"/>
                 </form>
 
 
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-center">
+                <h1 class="h2">Delete Book</h1>
+                <form class="form-inline my-2 my-lg-0" onsubmit="deleteBook();return false;">
+                    <input id="idForDelete" type="number" class="form-control mr-sm-2" placeholder="Id" aria-label="Id" step="1" min="1" required>
+                    <input type="submit" name="deleteSubmit" class="btn btn-md btn-outline-secondary" value="Delete"/>
+                </form>
+            </div>
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-center">
+                <h1 class="h2">Update Book</h1>
+                <form class="form-inline my-2 my-lg-0" onsubmit="updateBook();return false;">
+                    <input id="IdOfUpdatedBook" type="number" class="form-control mr-sm-2" placeholder="Id" aria-label="Id"
+                           step="1" min="1" required>
+                    <input id="NameToUpdate" type="text" class="form-control mr-sm-2" placeholder="New name" aria-label="New name">
+                    <input id="CntToUpdate" type="number" class="form-control mr-sm-2" placeholder="New cnt" aria-label="New cnt">
+                    <select class="form-control" name="bookTypesSelectorUpdate" id="bookTypesSelectorUpdate" onclick="getBookTypes()">
+                        <option label ="New Type Id" selected></option>
+                    </select>
+
+                    <input type="submit" name="updateSubmit" class="btn btn-md btn-outline-secondary" value="Update"/>
+                </form>
+            </div>
             </div>
             <h2>Books</h2>
             <div class="table-responsive">
@@ -139,6 +159,6 @@
 <script src="../assets/dist/js/bootstrap.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="Books.js"></script>
+<script src="../static/js/Books.js"></script>
 </body>
 </html>

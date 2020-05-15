@@ -1,7 +1,9 @@
+"use strict"
+
 var d = document;
 var Id = 1;
 
-function addRow()
+async function addRow()
 {
     // Считываем значения с формы
     var Name   = d.getElementById('Name').value;
@@ -23,7 +25,6 @@ function addRow()
     var td3 = d.createElement("TD");
     var td4 = d.createElement("TD");
 
-
     row.appendChild(td1);
     row.appendChild(td2);
     row.appendChild(td3);
@@ -42,19 +43,52 @@ function addRow()
 
     
     Id = Id+1;
-
+/*
     let xhr = new XMLHttpRequest();
 
-xhr.open('GET', "http://localhost:8080/lib/bookTypes");
+    xhr.open('GET', "http://localhost:8080/lib/bookTypes");
 
-xhr.send();
+    xhr.send();
+
+    xhr.onload = () => {
+        alert( 'Ошибка: ' + xhr.status + JSON.parse(xhr.response()));
+    }
+    */
+
+    let json = await JSON.stringify({
+        name:"bookType111",
+        cnt : 10,
+        fine : 100,
+        dayCount : 1000
+    });
+
+    const response = await fetch('http://localhost:8080/lib/addBookType', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: json
+    });
+
+    if (response.ok) {
+        alert((await response.json()).name);
+    }
+
+
+
 
    // HTTP ошибка?
+  // получим ответ из xhr.response
+
+
     // обработаем ошибку
-    alert( 'Ошибка: ' + xhr.status);
 
-    // получим ответ из xhr.response
-                                                          
+}
 
+async function getOne() {
+    const response = await fetch('http://localhost:8080/lib/addBookType');
 
+    if (response.ok) {
+        alert(await response.json());
+    }
 }
