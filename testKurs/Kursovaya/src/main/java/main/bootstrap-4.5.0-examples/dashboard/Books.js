@@ -52,9 +52,8 @@ xhr.send();
    // HTTP ошибка?
     // обработаем ошибку
     alert( 'Ошибка: ' + xhr.status);
-  
 
-  // получим ответ из xhr.response
+    // получим ответ из xhr.response
                                                           
 
 
