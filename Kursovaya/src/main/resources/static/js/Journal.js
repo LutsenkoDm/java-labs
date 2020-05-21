@@ -1,28 +1,22 @@
 let d = document;
-let Id = 1;
 
 async function addRow() {
-    let BookId = d.getElementById('BookId').value;
-    let ClientId = d.getElementById('ClientId').value;
-    let DateBeg = d.getElementById('DateBeg').value;
-    let DateEnd = d.getElementById('DateEnd').value;
-    let DateRet = d.getElementById('DateRet').value;
-
     let json = await JSON.stringify({
-        bookId:   BookId,
-        clientId: ClientId,
-        dateBeg:  DateBeg,
-        dateEnd:  DateEnd,
-        dateRet:  DateRet
+        bookId   : d.getElementById('BookId').value,
+        clientId : d.getElementById('ClientId').value,
+        dateBeg  : d.getElementById('DateBeg').value,
+        dateEnd  : d.getElementById('DateEnd').value,
+        dateRet  : d.getElementById('DateRet').value
     });
 
-    const response = await fetch('http://localhost:8080/lib/addJournalRecord', {
+    const response = await fetch('/lib/addJournalRecord', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: json
     });
+    const newJournalRecord = await response.json();
 
     if (response.ok) {
 
@@ -45,12 +39,12 @@ async function addRow() {
         row.appendChild(td5);
         row.appendChild(td6);
 
-        td1.innerHTML = Id;
-        td2.innerHTML = BookId;
-        td3.innerHTML = ClientId;
-        td4.innerHTML = DateBeg;
-        td5.innerHTML = DateEnd;
-        td6.innerHTML = DateRet;
+        td1.innerHTML = newJournalRecord.id;
+        td2.innerHTML = newJournalRecord.bookId;
+        td3.innerHTML = newJournalRecord.clientId;
+        td4.innerHTML = newJournalRecord.dateBeg;
+        td5.innerHTML = newJournalRecord.dateEnd;
+        td6.innerHTML = newJournalRecord.dateRet;
 
         d.getElementById('BookId').value = "";
         d.getElementById('ClientId').value = "";
@@ -58,7 +52,6 @@ async function addRow() {
         d.getElementById('DateEnd').value = "";
         d.getElementById('DateRet').value = "";
 
-        Id = Id + 1;
     } else {
         alert("Can`t add this journal record or BookId/Client does not exist")
     }
@@ -66,7 +59,7 @@ async function addRow() {
 
 async function getJournalRecord() {
     let JournalRecordId = document.getElementById('navSearch').value;
-    let urlString = "http://localhost:8080/lib/journal/" + JournalRecordId;
+    let urlString = "/lib/journal/" + JournalRecordId;
     const response = await fetch(urlString, {
         method: 'GET'
     });
@@ -88,7 +81,7 @@ async function deleteJournalRecord() {
     let journalRecordId = document.getElementById('idForDelete').value;
     let table = document.getElementById("table");
 
-    let urlString = "http://localhost:8080/lib/journal/" + journalRecordId;
+    let urlString = "/lib/journal/" + journalRecordId;
     const response = await fetch(urlString, {
         method: 'DELETE'
     });
@@ -108,7 +101,7 @@ async function deleteJournalRecord() {
 
 async function updateJournalRecord() {
     let journalRecordID = document.getElementById('IdOfUpdatedJournalRecord').value;
-    let urlString = "http://localhost:8080/lib/journal/" + journalRecordID;
+    let urlString = "/lib/journal/" + journalRecordID;
 
     let newBookId   = d.getElementById("BookIdToUpdate").value;
     let newClientId = d.getElementById("ClientIdToUpdate").value;

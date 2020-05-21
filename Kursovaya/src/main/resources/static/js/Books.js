@@ -1,15 +1,13 @@
 "use strict"
 
 let d = document;
-let Id = 1;
-
 let bookTypes = Array();
 
 const bookTypesSelectAdd = d.querySelector("#bookTypesSelectorAdd");
 const bookTypesSelectUpdate = d.querySelector("#bookTypesSelectorUpdate");
 
 async function getBookTypes() {
-    const response = await fetch('http://localhost:8080/lib/bookTypes', {
+    const response = await fetch('/lib/bookTypes', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -38,23 +36,20 @@ function renderBookTypesSelectUpdate() {
 
 async function addRow()
 {
-    let Name   = d.getElementById('Name').value;
-    let Cnt    = d.getElementById('Cnt').value;
-    let typeId = d.getElementById('bookTypesSelectorAdd').value;
-
     let json = await JSON.stringify({
-        name: Name,
-        cnt: Cnt ,
-        typeId : typeId
+        name   : d.getElementById('Name').value,
+        cnt    : d.getElementById('Cnt').value ,
+        typeId : d.getElementById('bookTypesSelectorAdd').value
     });
 
-    const response = await fetch('http://localhost:8080/lib/addBook', {
+    const response = await fetch('/lib/addBook', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: json
     });
+    const newBook = await response.json();
 
     if (response.ok) {
 
@@ -73,15 +68,14 @@ async function addRow()
         row.appendChild(td3);
         row.appendChild(td4);
 
-        td1.innerHTML = Id;
-        td2.innerHTML = Name;
-        td3.innerHTML = Cnt;
-        td4.innerHTML = typeId;
+        td1.innerHTML = newBook.id;
+        td2.innerHTML = newBook.name;
+        td3.innerHTML = newBook.cnt;
+        td4.innerHTML = newBook.typeId;
 
         d.getElementById('Name').value = "";
         d.getElementById('Cnt').value = "";
 
-        Id = Id + 1;
     } else {
         alert("Can`t add this book");
     }
@@ -89,7 +83,7 @@ async function addRow()
 
 async function getBook() {
     let bookId = document.getElementById('navSearch').value;
-    let urlString = "http://localhost:8080/lib/book/" + bookId;
+    let urlString = "/lib/book/" + bookId;
     const response = await fetch(urlString, {
         method: 'GET'
     });
@@ -111,7 +105,7 @@ async function deleteBook() {
     let bookId = document.getElementById('idForDelete').value;
     let table = document.getElementById("table");
 
-    let urlString = "http://localhost:8080/lib/book/" + bookId;
+    let urlString = "/lib/book/" + bookId;
     const response = await fetch(urlString, {
         method: 'DELETE'
     });
@@ -131,7 +125,7 @@ async function deleteBook() {
 
 async function updateBook() {
     let bookId = document.getElementById('IdOfUpdatedBook').value;
-    let urlString = "http://localhost:8080/lib/book/" + bookId;
+    let urlString = "/lib/book/" + bookId;
 
     let newName = d.getElementById("NameToUpdate").value;
     let newCnt = d.getElementById("CntToUpdate").value;

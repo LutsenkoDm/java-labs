@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Client</title>
+    <title>Clients</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -15,6 +15,7 @@
     <link href="../assets/dist/css/bootstrap.css" rel="stylesheet">
 
     <style>
+        @import 'dashboard.css';
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -29,9 +30,106 @@
                 font-size: 3.5rem;
             }
         }
+        body {
+            font-size: .875rem;
+        }
+
+        .feather {
+            width: 16px;
+            height: 16px;
+            vertical-align: text-bottom;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                top: 5rem;
+            }
+        }
+
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        @supports ((position: -webkit-sticky) or (position: sticky)) {
+            .sidebar-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+            }
+        }
+
+        .sidebar .nav-link {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .sidebar .nav-link .feather {
+            margin-right: 4px;
+            color: #999;
+        }
+
+        .sidebar .nav-link.active {
+            color: #007bff;
+        }
+
+        .sidebar .nav-link:hover .feather,
+        .sidebar .nav-link.active .feather {
+            color: inherit;
+        }
+
+        .sidebar-heading {
+            font-size: .75rem;
+            text-transform: uppercase;
+        }
+
+        /*
+         * Navbar
+         */
+
+        .navbar-brand {
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            font-size: 1rem;
+            background-color: rgba(0, 0, 0, .25);
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+        }
+
+        .navbar .navbar-toggler {
+            top: .25rem;
+            right: 1rem;
+        }
+
+        .navbar .form-control {
+            padding: .75rem 1rem;
+            border-width: 0;
+            border-radius: 0;
+        }
+
+        .form-control-dark {
+            color: #fff;
+            background-color: rgba(255, 255, 255, .1);
+            border-color: rgba(255, 255, 255, .1);
+        }
+
+        .form-control-dark:focus {
+            border-color: transparent;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+        }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -82,37 +180,37 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Add Client</h1>
-
-
-                <form class="form-inline my-2 my-lg-0" onsubmit="addRow();return false;">
-                    <input id="FirstName" type="text" class="form-control mr-sm-2" placeholder="FirstName"
-                           aria-label="FirstName" required>
-                    <input id="LastName" type="text" class="form-control mr-sm-2" placeholder="LastName"
-                           aria-label="LastName" required>
-                    <input id="PatherName" type="text" class="form-control mr-sm-2" placeholder="PatherName"
-                           aria-label="PatherName">
-                    <input id="PassportSeria" type="text" class="form-control mr-sm-2" placeholder="PassportSeria"
-                           aria-label="PassportSeria">
-                    <input id="PassportNum" type="text" class="form-control mr-sm-2" placeholder="PassportNum"
-                           aria-label="PassportNum" required>
-                    <input type="submit" name="subm" class="btn btn-md btn-outline-secondary" value="Add"/>
-                </form>
+            <div class="d-flex justify-content-around flex-wrap flex-md-nowrap align-items-start pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <form class="form-group my-2 my-lg-0" onsubmit="addRow();return false;">
+                        <h1 class="h2">Add Client</h1>
+                        <input id="FirstName" type="text" class="form-control mr-sm-2" placeholder="FirstName"
+                               aria-label="FirstName" required>
+                        <input id="LastName" type="text" class="form-control mr-sm-2" placeholder="LastName"
+                               aria-label="LastName" required>
+                        <input id="PatherName" type="text" class="form-control mr-sm-2" placeholder="PatherName"
+                               aria-label="PatherName">
+                        <input id="PassportSeria" type="text" class="form-control mr-sm-2" placeholder="PassportSeria"
+                               aria-label="PassportSeria">
+                        <input id="PassportNum" type="text" class="form-control mr-sm-2" placeholder="PassportNum"
+                               aria-label="PassportNum" required>
+                        <input type="submit" name="subm" class="btn btn-md btn-primary btn-block" value="Add"/>
+                    </form>
+                </div>
 
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-center">
-                    <h1 class="h2">Delete Client</h1>
-                    <form class="form-inline my-2 my-lg-0" onsubmit="deleteClient();return false;">
+                    <form class="form-group my-2 my-lg-0" onsubmit="deleteClient();return false;">
+                        <h1 class="h2">Delete Client</h1>
                         <input id="idForDelete" type="number" class="form-control mr-sm-2" placeholder="Id"
                                aria-label="Id" step="1" min="1" required>
-                        <input type="submit" name="deleteSubmit" class="btn btn-md btn-outline-secondary"
+                        <input type="submit" name="deleteSubmit" class="btn btn-md btn-primary btn-block"
                                value="Delete"/>
                     </form>
                 </div>
 
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-center">
-                    <h1 class="h2">Update Client</h1>
-                    <form class="form-inline my-2 my-lg-0" onsubmit="updateClient();return false;">
+                    <form class="form-group my-2 my-lg-0" onsubmit="updateClient();return false;">
+                        <h1 class="h2">Update Client</h1>
                         <input id="IdOfUpdatedClient" type="number" class="form-control mr-sm-2" placeholder="Id"
                                aria-label="Id" step="1" min="1" required>
                         <input id="FirstNameToUpdate" type="text" class="form-control mr-sm-2"
@@ -126,7 +224,7 @@
                         <input id="PassportNumToUpdate" type="text" class="form-control mr-sm-2"
                                placeholder="new PassportNum" aria-label="new PassportNum">
 
-                        <input type="submit" name="updateSubmit" class="btn btn-md btn-outline-secondary"
+                        <input type="submit" name="updateSubmit" class="btn btn-md btn-primary btn-block"
                                value="Update"/>
                     </form>
                 </div>
@@ -168,13 +266,6 @@
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
 <script src="../assets/dist/js/bootstrap.bundle.js"></script>

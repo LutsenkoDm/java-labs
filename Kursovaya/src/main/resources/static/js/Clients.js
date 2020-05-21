@@ -1,28 +1,23 @@
 let d = document;
-let Id = 1;
+
 
 async function addRow() {
-    let FirstName = d.getElementById('FirstName').value;
-    let LastName = d.getElementById('LastName').value;
-    let PatherName = d.getElementById('PatherName').value;
-    let PassportSeria = d.getElementById('PassportSeria').value;
-    let PassportNum = d.getElementById('PassportNum').value;
-
     let json = await JSON.stringify({
-        firstName: FirstName,
-        lastName: LastName,
-        patherName: PatherName,
-        passportSeria: PassportSeria,
-        passportNum: PassportNum
+        firstName     :  d.getElementById('FirstName').value,
+        lastName      :  d.getElementById('LastName').value,
+        patherName    :  d.getElementById('PatherName').value,
+        passportSeria :  d.getElementById('PassportSeria').value,
+        passportNum   :  d.getElementById('PassportNum').value
     });
 
-    const response = await fetch('http://localhost:8080/lib/addClient', {
+    const response = await fetch('/lib/addClient', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: json
     });
+    const newClient = await response.json();
 
     if (response.ok) {
         let tbody = d.getElementById('table').getElementsByTagName('TBODY')[0];
@@ -43,12 +38,12 @@ async function addRow() {
         row.appendChild(td5);
         row.appendChild(td6);
 
-        td1.innerHTML = Id;
-        td2.innerHTML = FirstName;
-        td3.innerHTML = LastName;
-        td4.innerHTML = PatherName;
-        td5.innerHTML = PassportSeria;
-        td6.innerHTML = PassportNum;
+        td1.innerHTML = newClient.id;
+        td2.innerHTML = newClient.firstName;
+        td3.innerHTML = newClient.lastName;
+        td4.innerHTML = newClient.patherName;
+        td5.innerHTML = newClient.passportSeria;
+        td6.innerHTML = newClient.passportNum;
 
         d.getElementById('FirstName').value = "";
         d.getElementById('LastName').value = "";
@@ -56,7 +51,6 @@ async function addRow() {
         d.getElementById('PassportSeria').value = "";
         d.getElementById('PassportNum').value = "";
 
-        Id = Id + 1;
     } else {
         alert("Can`t add this client")
     }
@@ -64,7 +58,7 @@ async function addRow() {
 
 async function getClient() {
     let clientId = document.getElementById('navSearch').value;
-    let urlString = "http://localhost:8080/lib/client/" + clientId;
+    let urlString = "/lib/client/" + clientId;
     const response = await fetch(urlString, {
         method: 'GET'
     });
@@ -86,7 +80,7 @@ async function deleteClient() {
     let clientId = document.getElementById('idForDelete').value;
     let table = document.getElementById("table");
 
-    let urlString = "http://localhost:8080/lib/client/" + clientId;
+    let urlString = "/lib/client/" + clientId;
     const response = await fetch(urlString, {
         method: 'DELETE'
     });
@@ -106,7 +100,7 @@ async function deleteClient() {
 
 async function updateClient() {
     let clientId = document.getElementById('IdOfUpdatedClient').value;
-    let urlString = "http://localhost:8080/lib/client/" + clientId;
+    let urlString = "/lib/client/" + clientId;
 
     let newFirstName     = d.getElementById("FirstNameToUpdate").value;
     let newLastName      = d.getElementById("LastNameToUpdate").value;

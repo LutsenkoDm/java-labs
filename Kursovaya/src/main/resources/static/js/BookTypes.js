@@ -1,27 +1,22 @@
 let d = document;
-let Id = 1;
 
 async function addRow()
 {
-    let Name   = d.getElementById('Name').value;
-    let Cnt = d.getElementById('Cnt').value;
-    let Fine  = d.getElementById('Fine').value;
-    let DayCount  = d.getElementById('DayCount').value;
-
     let json = await JSON.stringify({
-        name: Name,
-        cnt: Cnt ,
-        fine : Fine,
-        dayCount : DayCount
+        name     : d.getElementById('Name').value,
+        cnt      : d.getElementById('Cnt').value ,
+        fine     : d.getElementById('Fine').value,
+        dayCount : d.getElementById('DayCount').value
     });
 
-    const response = await fetch('http://localhost:8080/lib/addBookType', {
+    const response = await fetch('/lib/addBookType', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: json
     });
+    const newBookType = await response.json();
 
     if (response.ok) {
         let tbody = d.getElementById('table').getElementsByTagName('TBODY')[0];
@@ -40,20 +35,17 @@ async function addRow()
         row.appendChild(td4);
         row.appendChild(td5);
 
-        td1.innerHTML = Id;
-        td2.innerHTML = Name;
-        td3.innerHTML = Cnt;
-        td4.innerHTML = Fine;
-        td5.innerHTML = DayCount;
+        td1.innerHTML = newBookType.id;
+        td2.innerHTML = newBookType.name;
+        td3.innerHTML = newBookType.cnt;
+        td4.innerHTML = newBookType.fine;
+        td5.innerHTML = newBookType.dayCount;
 
         d.getElementById('Name').value= "";
         d.getElementById('Cnt').value= "";
         d.getElementById('Fine').value= "";
         d.getElementById('DayCount').value= "";
 
-        Id = Id+1;
-
-        const newBookType = await response.json();
         bookTypes.push(newBookType);
         renderBookTypesSelectAdd();
         renderBookTypesSelectUpdate();
@@ -64,7 +56,7 @@ async function addRow()
 
 async function getBookType() {
     let bookTypeId = document.getElementById('navSearch').value;
-    let urlString = "http://localhost:8080/lib/bookType/" + bookTypeId;
+    let urlString = "/lib/bookType/" + bookTypeId;
     const response = await fetch(urlString, {
         method: 'GET'
     });
@@ -87,7 +79,7 @@ async function deleteBookType() {
     let bookTypeId = document.getElementById('idForDelete').value;
     let table = document.getElementById("table");
 
-    let urlString = "http://localhost:8080/lib/bookType/" + bookTypeId;
+    let urlString = "/lib/bookType/" + bookTypeId;
     const response = await fetch(urlString, {
         method: 'DELETE'
     });
@@ -106,7 +98,7 @@ async function deleteBookType() {
 
 async function updateBookType() {
     let bookTypeId = document.getElementById('IdOfUpdatedBookType').value;
-    let urlString = "http://localhost:8080/lib/bookType/" + bookTypeId;
+    let urlString = "/lib/bookType/" + bookTypeId;
 
     let newName = d.getElementById("NameToUpdate").value;
     let newCnt = d.getElementById("CntToUpdate").value;
