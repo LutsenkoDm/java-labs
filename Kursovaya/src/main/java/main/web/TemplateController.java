@@ -5,8 +5,6 @@ import main.repository.BookRepository;
 import main.repository.BookTypeRepository;
 import main.repository.ClientRepository;
 import main.repository.JournalRepository;
-import main.service.BookTypeService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

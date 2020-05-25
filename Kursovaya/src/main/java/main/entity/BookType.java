@@ -10,15 +10,6 @@ import java.util.Set;
 @Entity
 @Table(name = "bookTypes")
 public class BookType {
-    public BookType() {
-    }
-
-    public BookType(String name, Long cnt, Long fine, Long dayCount) {
-        this.name = name;
-        this.cnt = cnt;
-        this.fine = fine;
-        this.dayCount = dayCount;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

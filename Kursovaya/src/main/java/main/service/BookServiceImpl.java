@@ -1,9 +1,7 @@
 package main.service;
 
 import main.entity.Book;
-import main.entity.JournalRecord;
 import main.exeption.BookNotFoundExeption;
-import main.exeption.JournalNotFoundExeption;
 import main.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

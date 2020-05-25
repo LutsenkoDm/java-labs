@@ -11,17 +11,6 @@ import java.util.Set;
 @Table(name = "clients")
 public class Client {
 
-    public Client() {
-    }
-
-    public Client(String firstName, String lastName, String patherName, String passportSeria, String passportNum) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.patherName = patherName;
-        this.passportSeria = passportSeria;
-        this.passportNum = passportNum;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

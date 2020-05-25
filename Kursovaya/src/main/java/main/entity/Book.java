@@ -1,6 +1,7 @@
 package main.entity;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,15 +10,6 @@ import java.util.Set;
 @Entity
 @Table(name = "books")
 public class Book {
-
-    public Book() {
-    }
-
-    public Book(String name, Long cnt, Long typeId) {
-        this.name = name;
-        this.cnt = cnt;
-        this.typeId = typeId;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

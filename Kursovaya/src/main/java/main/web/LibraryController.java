@@ -156,17 +156,11 @@ public class LibraryController {
         try {
             JournalRecord updatedJournalRecord = journalService.findJournalRecord(id);
 
-            Long      newBookId   = newJournalRecord.getBookId();
-            Long      newClientId = newJournalRecord.getClientId();
-            Timestamp newDateBeg  = newJournalRecord.getDateBeg();
-            Timestamp newDateEnd  = newJournalRecord.getDateEnd();
-            Timestamp newDateRet  = newJournalRecord.getDateRet();
-
-            if (newBookId   != null) updatedJournalRecord.setBookId(newBookId);
-            if (newClientId != null) updatedJournalRecord.setClientId(newClientId);
-            if (newDateBeg  != null) updatedJournalRecord.setDateBeg(newDateBeg);
-            if (newDateEnd  != null) updatedJournalRecord.setDateEnd(newDateEnd);
-            if (newDateRet  != null) updatedJournalRecord.setDateRet(newDateRet);
+            updatedJournalRecord.setBookId(newJournalRecord.getBookId());
+            updatedJournalRecord.setClientId(newJournalRecord.getClientId());
+            updatedJournalRecord.setDateBeg(newJournalRecord.getDateBeg());
+            updatedJournalRecord.setDateEnd(newJournalRecord.getDateEnd());
+            updatedJournalRecord.setDateRet(newJournalRecord.getDateRet());
 
             return ResponseEntity.ok(journalService.addJournalRecord(updatedJournalRecord));
         } catch (JournalNotFoundExeption exception) {
@@ -179,17 +173,11 @@ public class LibraryController {
         try {
             Client updatedClient = clientService.findClient(id);
 
-            String firstName     = newClient.getFirstName();
-            String lastName      = newClient.getLastName();
-            String patherName    = newClient.getPatherName();
-            String passportSeria = newClient.getPassportSeria();
-            String passportNum   = newClient.getPassportNum();
-
-            if (firstName     != null) updatedClient.setFirstName(firstName);
-            if (lastName      != null) updatedClient.setLastName(lastName);
-            if (patherName    != null) updatedClient.setPatherName(patherName);
-            if (passportSeria != null) updatedClient.setPassportSeria(passportSeria);
-            if (passportNum   != null) updatedClient.setPassportNum(passportNum);
+            updatedClient.setFirstName(newClient.getFirstName());
+            updatedClient.setLastName(newClient.getLastName());
+            updatedClient.setPatherName(newClient.getPatherName());
+            updatedClient.setPassportSeria(newClient.getPassportSeria());
+            updatedClient.setPassportNum(newClient.getPassportNum());
 
             return ResponseEntity.ok(clientService.addClient(updatedClient));
         } catch (ClientNotFoundExeption exception) {
@@ -202,13 +190,9 @@ public class LibraryController {
         try {
             Book updatedBook = bookService.findBook(id);
 
-            String name   = newBook.getName();
-            Long   cnt    = newBook.getCnt();
-            Long   typeId = newBook.getTypeId();
-
-            if (name   != null) updatedBook.setName(name);
-            if (cnt    != null) updatedBook.setCnt(cnt);
-            if (typeId != null) updatedBook.setTypeId(typeId);
+            updatedBook.setName(newBook.getName());
+            updatedBook.setCnt(newBook.getCnt());
+            updatedBook.setTypeId(newBook.getTypeId());
 
             return ResponseEntity.ok(bookService.addBook(updatedBook));
         } catch (BookNotFoundExeption exception) {
@@ -221,15 +205,10 @@ public class LibraryController {
         try {
             BookType updatedBookType = bookTypeService.findBookType(id);
 
-            String name     = newBookType.getName();
-            Long   cnt      = newBookType.getCnt();
-            Long   fine     = newBookType.getFine();
-            Long   dayCount = newBookType.getDayCount();
-
-            if (name     != null) updatedBookType.setName(name);
-            if (cnt      != null) updatedBookType.setCnt(cnt);
-            if (fine     != null) updatedBookType.setFine(fine);
-            if (dayCount != null) updatedBookType.setDayCount(dayCount);
+            updatedBookType.setName(newBookType.getName());
+            updatedBookType.setCnt(newBookType.getCnt());
+            updatedBookType.setFine(newBookType.getFine());
+            updatedBookType.setDayCount(newBookType.getDayCount());
 
             return ResponseEntity.ok(bookTypeService.addBookType(updatedBookType));
         } catch (BookTypeNotFoundExeption exception) {

@@ -1,10 +1,6 @@
 package main.security;
 
-import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

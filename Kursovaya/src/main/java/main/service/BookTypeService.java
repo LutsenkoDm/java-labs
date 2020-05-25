@@ -1,6 +1,7 @@
 package main.service;
 
 import main.entity.BookType;
+
 import java.util.List;
 
 public interface BookTypeService {

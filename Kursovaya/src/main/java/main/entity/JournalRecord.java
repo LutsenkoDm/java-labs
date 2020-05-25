@@ -1,10 +1,9 @@
 package main.entity;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @Entity
@@ -30,6 +29,4 @@ public class JournalRecord {
 
     @Column(name = "dateRet")
     private Timestamp dateRet;
-
-
 }
